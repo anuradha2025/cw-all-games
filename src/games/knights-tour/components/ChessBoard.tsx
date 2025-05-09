@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js';
+import type { Square } from 'chess.js';
+import { Chessboard } from 'react-chessboard';
 
 interface ChessboardProps {
   onMove: (from: string, to: string) => boolean | void;
   solution?: string[]; // Array of chess notation strings representing the tour path
-  knightPosition?: string; // Current knight position in chess notation
+  knightPosition?: Square; // Use Square (which is a string) instead of string
 }
 
 const ChessboardComponent: React.FC<ChessboardProps> = ({ onMove, solution = [], knightPosition }) => {
@@ -14,25 +15,23 @@ const ChessboardComponent: React.FC<ChessboardProps> = ({ onMove, solution = [],
 
   useEffect(() => {
     chess.clear();
-    // If knightPosition is provided, place knight there, else default to a1
-    chess.put({ type: 'n', color: 'w' }, knightPosition || 'a1');
+    // If knightPosition is provided, place knight there, else default to 'a1'
+    chess.put({ type: 'n', color: 'w' }, knightPosition || 'a1' as Square);
     setPosition(chess.fen());
   }, [chess, knightPosition]);
 
-  // Only allow moving the knight from the current position
   const handleMove = (from: string, to: string, _piece: string) => {
     if (from !== (knightPosition || 'a1')) return false;
     const valid = onMove(from, to);
     if (valid) {
       chess.clear();
-      chess.put({ type: 'n', color: 'w' }, to);
+      chess.put({ type: 'n', color: 'w' }, to as Square);
       setPosition(chess.fen());
       return true;
     }
     return false;
   };
 
-  // Highlight the solution path (player's moves)
   const getSquareStyles = () => {
     const styles: Record<string, React.CSSProperties> = {};
     if (solution && solution.length > 0) {

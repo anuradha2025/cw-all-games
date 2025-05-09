@@ -25,7 +25,7 @@ type BoardProps = {
     route?: number[];
 };
 
-function Board({ matrix, homeCity, selectedCities, cityLabels, route }: BoardProps) {
+function Board({ homeCity, selectedCities, cityLabels, route }: BoardProps) {
     // Route to draw: home -> selected cities in order -> home
     const drawRoute = route && route.length > 1
         ? [homeCity, ...route, homeCity]

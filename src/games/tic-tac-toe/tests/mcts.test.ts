@@ -1,5 +1,5 @@
 import { mctsMove } from "../logic/ticTacToe/mcts";
-import { Board } from "../logic/ticTacToe/types";
+import type { Board } from "../logic/ticTacToe/types";
 
 describe("mctsMove", () => {
   it("should pick a winning move if available", () => {

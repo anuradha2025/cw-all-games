@@ -1,6 +1,6 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import styles from "./Home.module.css";  // Import the CSS Module
+import styles from "./Home.module.css";
 
 const TicTacToe = lazy(() => import("./games/tic-tac-toe/App"));
 const KnightsTour = lazy(() => import("./games/knights-tour/App"));

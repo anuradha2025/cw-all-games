@@ -5,7 +5,7 @@ import {
   isDraw,
   getGameResult,
 } from "../logic/ticTacToe/gameLogic";
-import { Board } from "../logic/ticTacToe/types";
+import type { Board } from "../logic/ticTacToe/types";
 
 describe("TicTacToe gameLogic", () => {
   it("should create an empty 5x5 board", () => {
@@ -66,10 +66,11 @@ describe("TicTacToe gameLogic", () => {
   });
 
   it("should detect a draw", () => {
-    // Fill the board with no winner
     const board: Board = Array.from({ length: 5 }, (_, r) =>
       Array.from({ length: 5 }, (_, c) => ((r + c) % 2 === 0 ? "X" : "O"))
     );
+    // Break the winning diagonal by changing the center cell
+    board[2][2] = "O";
     expect(isDraw(board)).toBe(true);
     expect(getGameResult(board)).toEqual({ winner: null, draw: true });
   });

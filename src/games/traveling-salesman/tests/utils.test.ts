@@ -1,5 +1,6 @@
 import { generateDistanceMatrix } from "../utils/matrixGenerator";
-import { saveTSPResult, loadTSPResults, clearTSPResults, TSPResult } from "../utils/localStorage";
+import { saveTSPResult, loadTSPResults, clearTSPResults } from "../utils/localStorage";
+import type { TSPResult } from "../utils/localStorage";
 
 describe("Matrix Generator", () => {
   it("generates a symmetric matrix with correct size and range", () => {
@@ -34,6 +35,7 @@ describe("LocalStorage Helpers", () => {
       route: [1, 2],
       distance: 123,
       date: new Date().toISOString(),
+      timeMs: 0
     };
     saveTSPResult(result);
     const results = loadTSPResults();
@@ -50,6 +52,7 @@ describe("LocalStorage Helpers", () => {
       route: [2, 3],
       distance: 456,
       date: new Date().toISOString(),
+      timeMs: 0    // <-- Added missing property
     };
     saveTSPResult(result);
     clearTSPResults();
