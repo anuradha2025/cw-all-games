@@ -1,5 +1,5 @@
 import { minimaxMove } from "../logic/ticTacToe/minimax";
-import { Board, Player } from "../logic/ticTacToe/types";
+import type { Board, Player } from "../logic/ticTacToe/types";
 
 describe("minimaxMove", () => {
   it("should pick a winning move if available", () => {

@@ -1,11 +1,12 @@
 import React, { useState, useRef } from 'react';
 import ChessboardComponent from './components/ChessBoard';
-import { solveKnightTour } from './algorithms/backtracking';
+// import { solveKnightTour } from './algorithms/backtracking';
 import { solveWarnsdorffTour } from './algorithms/warnsdorff';
 import { BOARD_SIZE, convertToChessNotation } from './utils/boardUtils';
 import type { PlayerResult } from './types';
 import { isKnightMove } from './utils/boardUtils';
 import { loadResults, saveResult } from './services/storage';
+import type { Square } from 'chess.js';
 
 // MUI imports
 import { Container, Box, Typography, Button, Snackbar, Alert, TextField, MenuItem, Select, InputLabel, FormControl, Paper, List, ListItem, ListItemText, Divider } from '@mui/material';
@@ -21,11 +22,12 @@ const algorithmOptions = [
   { label: "Warnsdorff's Heuristic", value: 'warnsdorff' },
 ];
 
-enum GameMode {
-  MENU = 'menu',
-  KNIGHTS_TOUR = 'knights_tour',
-  SOLVER = 'solver'
-}
+const GameMode = {
+    MENU: 'menu',
+    KNIGHTS_TOUR: 'knights_tour',
+    SOLVER: 'solver'
+} as const;
+type GameMode = typeof GameMode[keyof typeof GameMode];
 
 function getRandomStart() {
   return {
@@ -315,7 +317,7 @@ function App() {
             <ChessboardComponent
               onMove={handlePlayerMove}
               solution={playerMoves}
-              knightPosition={playerMoves[playerMoves.length - 1]}
+              knightPosition={playerMoves[playerMoves.length - 1] as Square}
             />
           </Box>
           <Typography align="center" sx={{ mt: 2 }}>
@@ -433,7 +435,7 @@ function App() {
           <ChessboardComponent
             onMove={() => {}}
             solution={solution}
-            knightPosition={convertToChessNotation(start.x, start.y)}
+            knightPosition={convertToChessNotation(start.x, start.y) as Square}
           />
         </Box>
         {solution.length > 0 && (
