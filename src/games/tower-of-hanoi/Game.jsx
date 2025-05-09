@@ -252,7 +252,7 @@ const Game = () => {
                     onChange={handleMoveSequenceChange}
                     rows="1"
                     className={styles.moveSequenceText}
-                    placeholder="Enter moves manually or use clicks..."
+                    placeholder="Enter moves manually or click on each peg..."
                     disabled={gameCompleted}
                 ></textarea>
             </div>
