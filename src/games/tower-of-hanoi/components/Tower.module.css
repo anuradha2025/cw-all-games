@@ -22,12 +22,13 @@
   min-width: 180px;
   min-height: 320px;
   background: #f9f9f9;
-  border: 1px solid #ddd;
+  border: 2px solid #ddd;
   border-radius: 10px;
   padding: 10px;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
+  cursor: pointer;
 }
 
 .selected {
@@ -44,8 +45,7 @@
   text-align: center;
   border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: background 0.3s ease, transform 0.2s ease;
-  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease, width 0.3s ease;
 }
 
 .moveSequenceText {
@@ -68,4 +68,9 @@
 .peg > .disk {
   position: relative;
   z-index: 1;
+}
+
+.tower:focus,
+.peg:focus {
+  outline: none;
 }
