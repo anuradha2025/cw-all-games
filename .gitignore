@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 .env
+# Tauri build output
+src-tauri/target
