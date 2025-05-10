@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react"
 import styles from "./Home.module.css";
 
 const TicTacToe = lazy(() => import("./games/tic-tac-toe/App"));
@@ -56,6 +57,7 @@ export default function App() {
           <Route path="/tsp" element={<TSP />} />
         </Routes>
       </Suspense>
+      <Analytics />
     </Router>
   );
 }
