@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { TextField } from "@mui/material";
+import { useNavigate } from 'react-router-dom';
 
 declare global {
   interface Window {
@@ -19,6 +20,7 @@ type MenuProps = {
 export const Menu: React.FC<MenuProps> = ({ onSelectGame }) => {
   const [algorithm, setAlgorithm] = useState<"minimax" | "mcts">("minimax");
   const [name, setName] = useState<string>("");
+  const navigate = useNavigate();
 
   // Store name globally and in localStorage
   const handleStartGame = () => {
@@ -37,6 +39,10 @@ export const Menu: React.FC<MenuProps> = ({ onSelectGame }) => {
       window.playerName = stored;
     }
   }, []);
+
+  const handleBack = () => {
+    navigate('/');  // navigates to the root URL
+  };
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" gap={2} mt={4}>
@@ -80,7 +86,13 @@ export const Menu: React.FC<MenuProps> = ({ onSelectGame }) => {
       >
         Tic-Tac-Toe 5x5
       </Button>
-      {/* Add more games here as needed */}
+      <Button
+        variant="outlined"
+        size="large"
+        color="error"
+        onClick={handleBack}>
+        Back to Main Menu
+      </Button>
     </Box>
   );
 };

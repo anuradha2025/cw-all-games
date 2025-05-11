@@ -33,8 +33,17 @@ h1, h2, h3 {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.restartButton:hover, .quitButton:hover {
+.quitButton{
+  background-color: #d21919;
+}
+
+.restartButton:hover {
   background-color: #1565c0;
+  transform: translateY(-2px);
+}
+
+.quitButton:hover {
+  background-color: #c03715;
   transform: translateY(-2px);
 }
 

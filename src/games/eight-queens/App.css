@@ -166,7 +166,7 @@ table tbody tr:hover {
   background-color: #ce4848;
   transition: background-color 0.3s ease;
   text-align: center; /* Center the text */
-  align-self: flex-end; /* Align button itself to center */
+  /* align-self: flex-end; Align button itself to center */
   height: auto; /* Let the height adjust to content */
   padding: 10px; /* Add some padding for better look */
   box-sizing: border-box; /* Include padding in width calculation */
@@ -224,3 +224,26 @@ table tbody tr:hover {
   }
 }
 
+.btn-container{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.back-button{
+  background-color: transparent;
+  color: red;
+  outline: red solid 1px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  max-width: 60%;
+}
+.back-button:hover{
+  background-color: rgba(183, 1, 1, 0.05);
+  
+}

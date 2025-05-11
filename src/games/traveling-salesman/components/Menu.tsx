@@ -1,14 +1,21 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { useNavigate } from 'react-router-dom';
 
 type MenuProps = {
     onStart: () => void;
 };
 
 function Menu({ onStart }: MenuProps) {
+    const navigate = useNavigate();
+
+    const handleBack = () => {
+        navigate('/');  // navigates to the root URL
+    };
+
     return (
-        <Box display="flex" flexDirection="column" alignItems="center" mb={4}>
+        <Box display="flex" flexDirection="column" alignItems="center" mb={4} gap={1}>
             <Button
                 variant="contained"
                 color="primary"
@@ -24,6 +31,13 @@ function Menu({ onStart }: MenuProps) {
                 }}
             >
                 Start TSP Game
+            </Button>
+            <Button
+                variant="outlined"
+                size="large"
+                color="error"
+                onClick={handleBack}>
+                Back to Main Menu
             </Button>
         </Box>
     );

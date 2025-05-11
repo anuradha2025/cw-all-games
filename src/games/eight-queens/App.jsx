@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { saveSolution, getAllSolutions } from "./db/storage";
 import hanldle from "./exc/Excpetionhandle";
+import { useNavigate } from 'react-router-dom';
 
 const BOARD_SIZE = 8;
 
@@ -20,6 +21,7 @@ function App() {
   });
   // Optional: if you want to determine if all solutions have been found
   const [allSolutionsFound, setAllSolutionsFound] = useState(false);
+  const navigate = useNavigate();
 
   // Initialize total solutions using a Worker if available, otherwise fallback
   useEffect(() => {
@@ -30,6 +32,7 @@ function App() {
     }
     loadWorker();
   }, []);
+
 
   async function loadWorker() {
     if (typeof window !== "undefined" && typeof window.Worker !== "undefined") {
@@ -137,6 +140,10 @@ function App() {
     setTimeout(() => setShowToast(false), 3000);
   };
 
+  const handleBack = () => {
+    navigate('/');  // navigates to the root URL
+  };
+
   return (
     <div className="container">
       <h1>Eight Queens Puzzle</h1>
@@ -223,9 +230,14 @@ function App() {
                 ))}
             </tbody>
           </table>
-          <button className="terminate" onClick={terminate}>
-            Terminate
-          </button>
+          <div className="btn-container">
+            <button className="terminate" onClick={terminate}>
+              Terminate
+            </button>
+            <button className="back-button" onClick={handleBack}>
+              Back to Main Menu
+            </button>
+          </div>
 
           {showAlert && <div className="custom-alert">Session is over</div>}
           {showToast && <div className="custom-toast">{toastMessage}</div>}

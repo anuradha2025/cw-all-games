@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from 'react-router-dom';
 
 type FormsProps = {
     cityLabels: string[];
@@ -20,6 +21,7 @@ function Forms({ cityLabels, homeCity, onSubmit, playerName, selectedCities }: F
     const [name, setName] = useState(playerName);
     const [cities, setCities] = useState<number[]>(selectedCities);
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     const MAX_CITIES = 9; // Can't select all (must exclude home)
     const MIN_CITIES = 2;
@@ -57,6 +59,12 @@ function Forms({ cityLabels, homeCity, onSubmit, playerName, selectedCities }: F
     const helperText = `Pick ${MIN_CITIES}–${MAX_CITIES} cities (Brute Force supports up to ${MAX_BRUTE})`;
 
     const isInvalid = !!validate();
+
+
+
+    const handleBack = () => {
+        navigate('/');  // navigates to the root URL
+    };
 
     return (
         <Box
@@ -108,23 +116,31 @@ function Forms({ cityLabels, homeCity, onSubmit, playerName, selectedCities }: F
                 ))}
             </FormGroup>
             {error && <Alert severity="error" sx={{ mt: 2, width: 260 }}>{error}</Alert>}
-            <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                sx={{
-                    mt: 3,
-                    px: 4,
-                    py: 1.2,
-                    fontWeight: 600,
-                    fontSize: 16,
-                    borderRadius: 2,
-                    background: "linear-gradient(90deg, #1976d2 60%, #42a5f5 100%)"
-                }}
-                disabled={isInvalid}
-            >
-                Submit
-            </Button>
+            <Box display="flex" flexDirection="column" alignItems="center" mb={4} gap={1}>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    sx={{
+                        mt: 3,
+                        px: 4,
+                        py: 1.2,
+                        fontWeight: 600,
+                        fontSize: 16,
+                        borderRadius: 2,
+                        background: "linear-gradient(90deg, #1976d2 60%, #42a5f5 100%)"
+                    }}
+                >
+                    Submit
+                </Button>
+                <Button
+                    variant="outlined"
+                    size="large"
+                    color="error"
+                    onClick={handleBack}>
+                    Back to Main Menu
+                </Button>
+            </Box>
         </Box>
     );
 }
