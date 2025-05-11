@@ -16,6 +16,7 @@ import ExtensionIcon from '@mui/icons-material/Extension';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import FlagIcon from '@mui/icons-material/Flag';
+import { useNavigate } from 'react-router-dom';
 
 const algorithmOptions = [
   { label: 'Backtracking', value: 'backtracking' },
@@ -23,9 +24,9 @@ const algorithmOptions = [
 ];
 
 const GameMode = {
-    MENU: 'menu',
-    KNIGHTS_TOUR: 'knights_tour',
-    SOLVER: 'solver'
+  MENU: 'menu',
+  KNIGHTS_TOUR: 'knights_tour',
+  SOLVER: 'solver'
 } as const;
 type GameMode = typeof GameMode[keyof typeof GameMode];
 
@@ -57,6 +58,7 @@ function getValidKnightMoves(from: string, visited: string[]): string[] {
 
 function App() {
   const [mode, setMode] = useState<GameMode>(GameMode.MENU);
+  const navigate = useNavigate();
 
   // For solver mode (existing)
   const [start, setStart] = useState({ x: 0, y: 0 });
@@ -164,6 +166,10 @@ function App() {
     setAlgorithm(e.target.value);
   };
 
+  const handleBack = () => {
+    navigate('/');  // navigates to the root URL
+  };
+
   const handleSolve = () => {
     setError(null);
     setSolution([]);
@@ -238,6 +244,15 @@ function App() {
               sx={{ px: 4, py: 2, borderRadius: 2, fontWeight: 600 }}
             >
               Knight's Tour Solver
+            </Button>
+          </Box>
+          <Box display="flex" gap={2} justifyContent="center" my={3}>
+            <Button
+              variant="outlined"
+              size="large"
+              color="error"
+              onClick={handleBack}>
+              Back to Main Menu
             </Button>
           </Box>
           <Divider sx={{ my: 3 }} />
@@ -433,7 +448,7 @@ function App() {
         )}
         <Box my={2}>
           <ChessboardComponent
-            onMove={() => {}}
+            onMove={() => { }}
             solution={solution}
             knightPosition={convertToChessNotation(start.x, start.y) as Square}
           />
